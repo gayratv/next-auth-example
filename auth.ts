@@ -32,50 +32,17 @@ import type { NextAuthConfig } from "next-auth"
 export const config = {
   theme: { logo: "https://authjs.dev/img/logo-sm.png" },
   providers: [
-    Apple,
-    Auth0,
-    AzureB2C({
-      clientId: process.env.AUTH_AZURE_AD_B2C_ID,
-      clientSecret: process.env.AUTH_AZURE_AD_B2C_SECRET,
-      issuer: process.env.AUTH_AZURE_AD_B2C_ISSUER,
-    }),
-    BoxyHQSAML({
-      clientId: "dummy",
-      clientSecret: "dummy",
-      issuer: process.env.AUTH_BOXYHQ_SAML_ISSUER,
-    }),
-    Cognito,
-    Coinbase,
-    Discord,
-    Dropbox,
-    Facebook,
-    GitHub,
-    Gitlab,
+
     Google,
-    Hubspot,
-    Keycloak,
-    LinkedIn,
-    Netlify,
-    Okta,
-    Passage,
-    Pinterest,
-    Reddit,
-    Slack,
-    Spotify,
-    Twitch,
-    Twitter,
-    WorkOS({
-      connection: process.env.AUTH_WORKOS_CONNECTION!,
-    }),
-    Zoom,
+
   ],
   basePath: "/auth",
   callbacks: {
-    authorized({ request, auth }) {
+  /*  authorized({ request, auth }) {
       const { pathname } = request.nextUrl
       if (pathname === "/middleware-example") return !!auth
       return true
-    },
+    },*/
     jwt({ token, trigger, session }) {
       if (trigger === "update") token.name = session.user.name
       return token

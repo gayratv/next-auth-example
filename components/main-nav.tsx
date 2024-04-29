@@ -57,6 +57,12 @@ export function MainNav() {
             >
               Client Side
             </NavigationMenuLink>
+            <NavigationMenuLink
+              href="/mw2"
+              className={navigationMenuTriggerStyle()}
+            >
+              MW2
+            </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

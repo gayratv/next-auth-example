@@ -1,4 +1,5 @@
 import type { Session } from "next-auth"
+import Image from 'next/image';
 
 export default function SessionData({ session }: { session: Session | null }) {
   if (session?.user) {
@@ -18,21 +19,29 @@ export default function SessionData({ session }: { session: Session | null }) {
             the page to avoid exposing sensitive information.
           </p>
         )}
-        <div className="flex flex-col rounded-md bg-neutral-100">
-          <div className="p-4 font-bold rounded-t-md bg-neutral-200">
-            Session
-          </div>
-          <pre className="py-6 px-4 whitespace-pre-wrap break-all">
+          <div className="flex flex-col rounded-md bg-neutral-100">
+              <div className="p-4 font-bold rounded-t-md bg-neutral-200">
+                  Session
+              </div>
+              <pre className="py-6 px-4 whitespace-pre-wrap break-all">
             {JSON.stringify(session, null, 2)}
           </pre>
-        </div>
+              <div>
+                  <Image
+                      src={session.user.image ? session.user.image : '/images/default.png'}
+                      alt={`profile photo of ${session.user.name}`}
+                      width={90}
+                      height={90}
+                  />
+              </div>
+          </div>
       </div>
     )
   }
 
-  return (
-    <p>
-      No session data, please <em>Sign In</em> first.
-    </p>
-  )
+    return (
+        <p>
+            No session data, please <em>Sign In</em> first.
+        </p>
+    )
 }

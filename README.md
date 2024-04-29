@@ -1,3 +1,12 @@
+This example add page protection by middleware 
+
+Main changes:
+1. remove authorized event in ./auth.ts
+2. rewrite middleware in ./middleware.ts
+
+Now to protect pages (client or server)  -simple add it to matcher
+
+
 > The example repository is maintained from a [monorepo](https://github.com/nextauthjs/next-auth/tree/main/apps/examples/nextjs). Pull Requests should be opened against [`nextauthjs/next-auth`](https://github.com/nextauthjs/next-auth).
 
 <p align="center">

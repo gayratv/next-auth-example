@@ -1,11 +1,22 @@
-export { auth as middleware } from "auth"
+import { NextResponse } from 'next/server'
+import {auth} from "@/auth";
+import {NextAuthRequest} from "next-auth/lib";
 
-// Or like this if you need to do something here.
-// export default auth((req) => {
-//   console.log(req.auth) //  { session: { user: { ... } } }
-// })
-
-// Read more: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/client-example/:path*","/mw2/:path*"],
 }
+
+ const authMiddleware = auth(async (req: NextAuthRequest) => {
+  const response = NextResponse.next();
+
+
+  if (!req.auth) {
+      // redirect to page with information about protection
+    const u=(new URL('/protect-info', req.url)).toString()+`/?OriginalUrl=${encodeURIComponent(req.url)}`;
+    return NextResponse.redirect(u)
+
+  }
+});
+
+ export default authMiddleware;
+
